@@ -9,7 +9,7 @@ import { AiOutlineNotification } from "react-icons/ai";
 import { AiOutlineUser, } from "react-icons/ai";
 
 function Navbar() {
-  const isUserLoggedIn = false;
+  const isUserLoggedIn = true;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const [ providers, setProviders ] = useState(null);
@@ -30,26 +30,26 @@ function Navbar() {
     <>
           <div>
             <div className="sm:flex hidden">
-              <div className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 border-b border-gray-200 dark:border-gray-600">
+              <div className="bg-white dark:bg-blue-700 fixed w-full z-20 top-0 border-b border-gray-200 dark:border-gray-600">
                 <div className="mx-auto max-w-screen-xl">
                   <div className="flex justify-between items-center p-3">
                   <div className="flex items-center space-x-12">
-                      <ul className="flex">
+                      <ul className="flex gap-7" >
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <li>
-                          <Link href="/map" className="h-8 mr-3 flex items-center">
+                          <Link href="/map" className="h-16 mr-3 flex items-center">
                             <LuMapPin className="object-contain" />
                           </Link>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li>
-                          <Link href="/chat" className="h-8 mr-3 flex items-center">
+                          <Link href="/chat" className="h-16 mr-3 flex items-center">
                             <FiMessageSquare className="object-contain" />
                           </Link>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li>
-                          <Link href="/" className="h-8 mr-3 flex items-center">
+                          <Link href="/" className="h-16 mr-3 flex items-center">
                             <AiOutlineNotification />
                           </Link>
                         </li>
@@ -66,8 +66,11 @@ function Navbar() {
                       {isUserLoggedIn ? (
                         <>
                           <Link href="/">
-                            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                              Ajouter une annonce
+                            <button 
+                                type="button" 
+                                className="bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center"
+                                style={{ color: '#218AC6' }}>
+                                Ajouter une annonce
                             </button>
                           </Link>
                           <div className="relative">
