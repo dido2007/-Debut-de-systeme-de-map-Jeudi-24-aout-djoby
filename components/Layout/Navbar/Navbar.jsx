@@ -9,7 +9,7 @@ import { AiOutlineNotification } from "react-icons/ai";
 import { AiOutlineUser, } from "react-icons/ai";
 
 function Navbar() {
-  const isUserLoggedIn = true;
+  const isUserLoggedIn = false;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const [ providers, setProviders ] = useState(null);

@@ -3,26 +3,22 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-import iconUrl from 'leaflet/dist/images/marker-icon.png';
-import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+
+
 
 import useFetchDemandes from '@hooks/Map/useFetchDemandes';
 
-const MapDemande = () => {
+const MapDemande = ({ searchTerm }) => {
   const [userPosition, setUserPosition] = useState(null);
-  const { demandes, loading, error } = useFetchDemandes();
+  const { demandes, loading, error } = useFetchDemandes(searchTerm);
 
+  const customIcon = new L.Icon({
+    iconUrl: '/assets/map-marker.svg',
+    iconSize: [32, 32],  
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
 
-  useEffect(() => {
-    // Corrige les icônes Leaflet lorsqu'elles sont utilisées avec Webpack
-    delete L.Icon.Default.prototype._getIconUrl;
-    L.Icon.Default.mergeOptions({
-      iconRetinaUrl,
-      iconUrl,
-      shadowUrl,
-   });
-  }, []);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -57,10 +53,22 @@ const MapDemande = () => {
         />
       {demandes.map(demande => 
         demande.position && (
-          <Marker key={demande._id} position={[demande.position.latitude, demande.position.longitude]}>
-            <Popup>
-              {demande.demandeMetier} - {demande.tarifDemande}DT
-            </Popup>
+          <Marker             icon={customIcon} key={demande._id} position={[demande.position.latitude, demande.position.longitude]}>
+              <Popup>
+                  <div className="text-center p-2">
+                      <div className="text-lg font-bold mb-2 flex justify-center items-center">
+                          <span className="mr-2">💰</span>
+                          Au minimum : <span className="text-blue-500 ml-2">{demande.tarifDemande}DT</span>
+                     </div>
+                     <div className="text-md mb-3 flex justify-center items-center">
+                          <span className="mr-2">🔍</span>
+                          Cherche un : <span className="font-medium ml-2">{demande.demandeMetier}</span>
+                      </div>
+                      <button className="w-full bg-blue-500 rounded-lg px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition">
+                          Consulter l'offre
+                      </button>
+                  </div>
+              </Popup>
           </Marker>
         )
       )}

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import MapDemande from '@components/Map/MapDemande';
 import MapOffre from '@components/Map/MapOffre';
 
-function TabCardMap() {
+function TabCardMap({ searchTerm }) {
   const [activeTab, setActiveTab] = useState('offres');
 
     return (
@@ -84,7 +84,7 @@ function TabCardMap() {
               role="tabpanel"
               aria-labelledby="demandes-tab"
             >
-                <MapDemande />
+                <MapDemande searchTerm={searchTerm} />
             </div>
         </div>
       </>

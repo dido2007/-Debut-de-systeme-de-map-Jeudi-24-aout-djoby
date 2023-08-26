@@ -5,7 +5,15 @@ export async function GET(request) {
   try {
     await connectToDB();
 
-    const demandes = await Demande.find().select('position demandeMetier tarifDemande');
+    const queryParams = new URL(request.url).searchParams;
+    const metier = queryParams.get('metier');
+
+    let queryObj = {};
+    if (metier) {
+      queryObj.demandeMetier = metier;
+    }
+
+    const demandes = await Demande.find(queryObj).select('position demandeMetier tarifDemande ');
 
     return new Response(JSON.stringify(demandes), { status: 200, headers: { 'Content-Type': 'application/json' } });
   } catch (error) {

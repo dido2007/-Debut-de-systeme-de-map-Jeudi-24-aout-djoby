@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const DemandeSchema = new mongoose.Schema({
   annonceType: String,
-  cardtype: Number,
   demandeMetier: String,
   descriptionDemande: String,
   disponibiliteDemande: String,
