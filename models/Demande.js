@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const DemandeSchema = new mongoose.Schema({
   annonceType: String,
-  demandeMetier: String,
+  phone_number: String,
   descriptionDemande: String,
   disponibiliteDemande: String,
   imagesDemande: [String], // ou [Buffer] si vous stockez les images en tant que binaires
@@ -14,7 +14,8 @@ const DemandeSchema = new mongoose.Schema({
   position: {
     latitude: { type: Number },
     longitude: { type: Number }
-    }
+    },
+  demandeMetier: String
 });
 
 let Demande;
